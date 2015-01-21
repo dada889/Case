@@ -329,7 +329,7 @@ The statistical summary for all the continuous attributes.
 
 Summary of the 2 discret attributes.
 
-
+```
     housing_2 = housing[['CHAS','RAD']].copy()
     housing_2 = housing_2.astype(str)
     count = housing_2['RAD'].value_counts()
@@ -337,7 +337,7 @@ Summary of the 2 discret attributes.
     df_count.columns = ['count']
     df_count.index.name = 'RAD'
     df_count.transpose()
-
+```
     RAD     24    5    4   3   6   8   2   1   7
     count  132  115  110  38  26  24  24  20  17
 
@@ -379,14 +379,14 @@ Summary of the 2 discret attributes.
 </div>
 
 
-
+```
 
     count = housing_2['CHAS'].value_counts()
     df_count = pd.DataFrame(count)
     df_count.columns = ['count']
     df_count.index.name = 'CHAS'
     df_count.transpose()
-
+```
 
 
 
@@ -413,7 +413,7 @@ Summary of the 2 discret attributes.
 
 ### Data Visualization
 
-
+```
     # This line configures matplotlib to show figures embedded in the notebook, 
     # instead of opening a new window for each figure. More about that later. 
     %matplotlib inline
@@ -429,7 +429,7 @@ Summary of the 2 discret attributes.
 
 
     <matplotlib.axes.AxesSubplot at 0x7f5edfa0f250>
-
+```
 
 
 
@@ -464,7 +464,7 @@ housing value is unusually highly concentrate in 50.
 - CHAS=1 has higher housing value than CHAS=0
 - Instances with CHAS=0 is much more than CHAS=1
 
-
+```
     fig = plt.figure(figsize=(10,6))
     sns.boxplot(housing.MEDV,housing.RAD)
 
@@ -472,7 +472,7 @@ housing value is unusually highly concentrate in 50.
 
 
     <matplotlib.axes.AxesSubplot at 0x7f5edc5438d0>
-
+```
 
 
 
@@ -531,7 +531,7 @@ relationship to housing values:
 - It is obvious to see he relationship between $RM$, $LSTAT$ and housing value.
 - Some relationships are not that significant, such as $CRIM$ and $ZN$.
 
-
+```
     fig = plt.figure(figsize=(15,15))
     sns.corrplot(housing_1)
     plt.title("Correlation Matrix Visualization",fontsize=18)
@@ -540,7 +540,7 @@ relationship to housing values:
 
 
     <matplotlib.text.Text at 0x7f5e009ab110>
-
+```
 
 
 
@@ -558,13 +558,13 @@ any other attributes.
 
 Set up dummy variable RAD.
 
-
+```
     df = housing.copy()
     df.drop('RAD',1)
     rad = pd.get_dummies(df.RAD,prefix='RAD_')
     df1 = pd.concat([df,rad[rad.columns[1:]]],axis=1)
     rad.head()
-
+```
 
 
 
@@ -658,7 +658,7 @@ $$
 y_i =\beta_0 +  X_i\beta_1 + RAD_i\beta_2 +CHAS_i\beta_3 + \epsilon_i
 $$
 
-- $\beta_0$ is the intercept.
+- $\beta_0$ is the intercept.    
 - $X_i$ is 1 row 12 columns matrix of the 12 continuous variables for instance
 $i$,
 - $\beta_1$ is the coefficients for these 12 variables. $RAD_i$ is 1 row 8
@@ -671,7 +671,7 @@ columns(without RAD_1) matirx for categorical attribute RAD for instance $i$.
 
 Set up the training set and test set.
 
-
+```
     df=df1
     import random
     train_idx = random.sample(df.index,int(0.7*len(df)))
@@ -681,8 +681,8 @@ Set up the training set and test set.
     dfy_train = df_train.MEDV
     dfx_test = df_test.drop('MEDV',1)
     dfy_test = df_test.MEDV
-
-
+```
+```
     def train_and_evaluate(clf,X_train, X_test, y_train, y_test):
         clf.fit(X_train, y_train)
         
@@ -690,10 +690,10 @@ Set up the training set and test set.
         print clf.score(X_train, y_train)
         print "R^2 for test set:"
         print clf.score(X_test, y_test)
-
+```
 train and evaluate the model
 
-
+```
     lm = linear_model.LinearRegression()
     
     train_and_evaluate(lm,dfx_train,dfx_test,dfy_train,dfy_test)
@@ -702,11 +702,11 @@ train and evaluate the model
     0.717523973586
     R^2 for test set:
     0.767565576265
-
+```
 
 Show the coefficient and intercept
 
-
+```
     lm = linear_model.LinearRegression()
     lm.fit(dfx_train,dfy_train)
     colnames = dfx_train.columns.values
@@ -717,7 +717,7 @@ Show the coefficient and intercept
     result.columns = ['coefficient']
     
     result
-
+```
 
 
 
@@ -834,7 +834,7 @@ positive.
 
 #### Prediction of the model
 
-
+```
     housing_test = housing[~df.index.isin(train_idx)]
     housing_test_x = housing_test.drop('MEDV',1)
     housing_test_pred = lm.predict(dfx_test)
@@ -842,7 +842,7 @@ positive.
     pred['predicted_MEDV'] = housing_test_pred
     pred['actual_MEDV'] = dfy_test
     pred.head()
-
+```
 
 
 
