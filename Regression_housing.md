@@ -482,7 +482,7 @@ housing value is unusually highly concentrate in 50.
 - RAD 3 has the top housing value compare to others.
 - Housing value in RAD 24 is significantly lower than ther others.
 
-
+```
     df = housing_1.drop("MEDV",1)
     
     import matplotlib.gridspec as gridspec
@@ -519,7 +519,7 @@ housing value is unusually highly concentrate in 50.
                 tick.label1On = False
                 tick.label2On = True
     plt.tight_layout(pad=0, w_pad=0, h_pad=0)
-
+```
 
 ![png](Regression_housing_files/Regression_housing_21_0.png)
 
