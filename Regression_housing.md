@@ -37,7 +37,7 @@ regression model to predict the median housing value(MEDV) in Boston.
 - Statistics summary of the data
 - Visualize the data
 
-
+```
     from ggplot import *
     import numpy as np
     import pandas as pd
@@ -47,15 +47,15 @@ regression model to predict the median housing value(MEDV) in Boston.
     import matplotlib as mpl
     import matplotlib.pyplot as plt
     import matplotlib.gridspec as gridspec
-
+```
 ### Statistics Summary
 
-
+```
     housing = pd.read_csv("housing.data",delim_whitespace=True,header=None)
     colnames = ['CRIM','ZN','INDUS','CHAS','NOX','RM','AGE','DIS','RAD','TAX','PTRATIO','B','LSTAT','MEDV']
     housing.columns = colnames
     housing.head()
-
+```
 
 
 
@@ -174,10 +174,10 @@ regression model to predict the median housing value(MEDV) in Boston.
 
 The statistical summary for all the continuous attributes.
 
-
+```
     housing_1 = housing.drop('CHAS',1).drop('RAD',1)
     housing_1.describe()
-
+```
 
 
 
